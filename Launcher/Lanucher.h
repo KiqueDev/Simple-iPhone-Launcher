@@ -1,13 +1,13 @@
 //
-//  LauncherTests.h
-//  LauncherTests
+//  Lanucher.h
+//  Launcher
 //
 //  Created by Enrique W on 3/31/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <UIKit/UIKit.h>
 
-@interface LauncherTests : SenTestCase
+@interface Lanucher : UIViewController
 
 @end

@@ -9,15 +9,48 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+@class Launcher;
 
 @synthesize window = _window;
+@synthesize viewController;
+@synthesize tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor redColor];
+
+    
+    // set up a local nav controller which we will reuse for each view controller
+    UINavigationController *localNavigationController;
+    
+    tabBarController = [[UITabBarController alloc] init];
+
+    viewController= [[Launcher alloc] init];
+    //viewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:nil tag:0];
+    
+    NSMutableArray *localViewControllersArray = [[NSMutableArray alloc] init];
+    
+    // create the nav controller and add the root view controller as its first view
+    localNavigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    localNavigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
+    localNavigationController.delegate = self;
+ 
+    [localViewControllersArray addObject:localNavigationController];
+    tabBarController.viewControllers = localViewControllersArray;
+    
+    [tabBarController.view setFrame:CGRectMake(0,0, 320, 480)];
+    [tabBarController.tabBar setFrame:CGRectMake(0, 0, 0, 0)];
+
+    [tabBarController.view addSubview:localNavigationController.navigationBar];
+
+    [self.window addSubview:tabBarController.view];
+
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -58,6 +91,11 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+-(void)dealloc{
+    [super dealloc];
+
 }
 
 @end

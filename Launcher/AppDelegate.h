@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Launcher.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : NSObject <UIApplicationDelegate, UINavigationControllerDelegate>{
+    UITabBarController *tabBarController;
+    Launcher *viewController;
+}
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, retain) Launcher *viewController;
+@property (nonatomic, retain) UITabBarController *tabBarController;
 
 @end
